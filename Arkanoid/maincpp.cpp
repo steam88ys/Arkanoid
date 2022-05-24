@@ -16,4 +16,38 @@ void main(void)
 	t4.loadFromFile("images/paddle.png");
 
 
+	Sprite sBackground(t2), sBall(t3), sPaddle(t4);
+	sPaddle.setPosition(300, 400);
+	sBall.setPosition(300, 300);
+
+	Sprite block[1000];
+	int n = 0;
+	for (int x = 1; x <= 10; x++) 
+	{
+		for (int y = 0; y <= 10; y++)
+		{
+			block[n].setTexture(t1);
+			block[n].setTexture(x * 43, y * 20);
+			n++;
+		}
+	}
+
+	while (app.isOpen())
+	{
+		Event e;
+		while (app.pollEvent(e))
+		{
+			if (e.type == Event::Closed)
+				app.close();
+		}
+		app.clear();
+		app.draw(sBackground);
+		app.draw(sBall);
+		app.draw(sPaddle);
+		for (int i = 0; i < n; i++)
+			app.draw(block[i]);
+
+		app.display();
+	}
+
 }
