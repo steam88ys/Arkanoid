@@ -20,17 +20,18 @@ void main(void)
 	sPaddle.setPosition(300, 400);
 	sBall.setPosition(300, 300);
 
-	Sprite block[1000];
+	Sprite block[200];
 	int n = 0;
 	for (int x = 1; x <= 10; x++) 
 	{
 		for (int y = 0; y <= 10; y++)
 		{
 			block[n].setTexture(t1);
-			block[n].setTexture(x * 43, y * 20);
+			block[n].setPosition(x * 43, y * 20);
 			n++;
 		}
 	}
+	float dx = 1.0f, dy = 2.0f;	// (속도 조절 + 각도 조절)
 
 	while (app.isOpen())
 	{
@@ -40,6 +41,10 @@ void main(void)
 			if (e.type == Event::Closed)
 				app.close();
 		}
+		// 공 움직이기
+		sBall.move(dx, 0);
+		sBall.move(0, dy);
+
 		app.clear();
 		app.draw(sBackground);
 		app.draw(sBall);
