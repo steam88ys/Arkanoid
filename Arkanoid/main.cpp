@@ -31,7 +31,7 @@ void main(void)
 			n++;
 		}
 	}
-	float dx = 1.0f, dy = 2.0f;	// (속도 조절 + 각도 조절)
+	float dx = 5.0f, dy = 6.0f;	// (속도 조절 + 각도 조절)
 
 	while (app.isOpen())
 	{
@@ -41,9 +41,18 @@ void main(void)
 			if (e.type == Event::Closed)
 				app.close();
 		}
-		// 공 움직이기
+		// 볼 움직이기
 		sBall.move(dx, 0);
 		sBall.move(0, dy);
+
+		// 볼의 위치(좌표)
+		Vector2f b = sBall.getPosition();
+
+		// 화면 바깥쪽 테두리에 충돌하는 경우
+		if (b.x < 0 || b.x>520)
+			dx = -dx;
+		if (b.y < 0 || b.y>450)
+			dy = -dy;
 
 		app.clear();
 		app.draw(sBackground);
