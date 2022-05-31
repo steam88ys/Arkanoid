@@ -2,6 +2,9 @@
 
 using namespace sf;
 
+// 충돌여부 확인 (사각충돌)
+bool isCollide(Sprite s1, Sprite s2);
+
 void main(void)
 {
 
@@ -43,7 +46,24 @@ void main(void)
 		}
 		// 볼 움직이기
 		sBall.move(dx, 0);
+		for (int i = 0; i < n; i++) {
+			if (isCollide(sBall, block[i]))
+			{
+				dx = -dx;
+				// 벽돌을 시야에서 사라지게 함
+				block[i].setPosition(-300, 0);
+			}
+		}
+
 		sBall.move(0, dy);
+		for (int i = 0; i < n; i++) {
+			if (isCollide(sBall, block[i]))
+			{
+				dy = -dy;
+				// 벽돌을 시야에서 사라지게 함
+				block[i].setPosition(-300,0);
+			}
+		}
 
 		// 볼의 위치(좌표)
 		Vector2f b = sBall.getPosition();
@@ -56,12 +76,16 @@ void main(void)
 
 		app.clear();
 		app.draw(sBackground);
-		app.draw(sBall);
 		app.draw(sPaddle);
 		for (int i = 0; i < n; i++)
 			app.draw(block[i]);
-
+		app.draw(sBall);
 		app.display();
 	}
 
+}
+
+bool isCollide(Sprite s1, Sprite s2)
+{
+	return s1.getGlobalBounds().intersects(s2.getGlobalBounds());
 }
