@@ -74,11 +74,17 @@ void main(void)
 		if (b.y < 0 || b.y>450)
 			dy = -dy;
 
+		// 키보드에 따라 paddle이 움직임
+		if (Keyboard::isKeyPressed(Keyboard::Right))
+			sPaddle.move(9.0f, 0.0f);
+		if (Keyboard::isKeyPressed(Keyboard::Left))
+			sPaddle.move(-9.0f, 0.0f);
+
 		app.clear();
 		app.draw(sBackground);
 		app.draw(sPaddle);
 		for (int i = 0; i < n; i++)
-			app.draw(block[i]);
+			app.draw(block[i]); 
 		app.draw(sBall);
 		app.display();
 	}
