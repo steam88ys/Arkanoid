@@ -80,6 +80,11 @@ void main(void)
 		if (Keyboard::isKeyPressed(Keyboard::Left))
 			sPaddle.move(-9.0f, 0.0f);
 
+		if (isCollide(sPaddle, sBall))
+		{
+			dy = -dy;
+		}
+
 		app.clear();
 		app.draw(sBackground);
 		app.draw(sPaddle);
